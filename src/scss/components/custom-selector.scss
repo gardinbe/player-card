@@ -1,0 +1,59 @@
+.selector {
+	position: relative;
+	display: flex;
+	justify-content: flex-start;
+	user-select: none;
+
+	&.opened {
+		.options {
+			pointer-events: unset;
+			transform: translateY(0);
+			filter: opacity(1);
+		}
+	}
+
+	select {
+		display: none !important;
+	}
+
+	.selected-option,
+	.options .option {
+		display: flex;
+		padding: 0.75rem 1.5rem;
+		width: 100%;
+
+		cursor: pointer;
+
+		background-color: #eaeaea;
+		transition: background-color var(--anim);
+
+		&:hover {
+			background-color: whitesmoke;
+		}
+	}
+
+	.options {
+		margin: unset;
+		padding: unset;
+		list-style: none;
+
+		position: absolute;
+		top: 100%;
+
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+
+		pointer-events: none;
+		filter: opacity(0);
+		transform: translateY(-1rem);
+		transition: filter var(--anim), transform var(--anim);
+
+		.option {
+			// to keep the selected item in the list visible, remove this
+			&.selected {
+				display: none;
+			}
+		}
+	}
+}

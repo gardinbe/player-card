@@ -1,0 +1,115 @@
+.player-card-container {
+	position: relative;
+	width: 350px;
+	background-color: white;
+	animation: FadeIn 300ms ease-in-out;
+}
+
+$player-card-gutter: 1rem;
+
+//the selectbox
+.player-card-selector {
+	padding: $player-card-gutter;
+}
+
+//the card itself
+.player-card {
+	$this: &;
+
+	&--image {
+		background-color: white;
+		padding: $player-card-gutter $player-card-gutter 0;
+
+		img {
+			margin-bottom: -5px;
+			$size: 250px;
+			height: $size;
+			max-height: $size;
+			min-height: $size;
+		}
+	}
+
+	&--details {
+		position: relative;
+
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+
+		background-color: var(--color-primary);
+		padding: $player-card-gutter;
+
+		#{$this}--info {
+			display: flex;
+			align-items: center;
+			gap: $spacer;
+
+			&--basic {
+				flex: 1;
+
+				display: flex;
+				flex-direction: column;
+				gap: $spacer * 0.5;
+
+				margin-bottom: auto;
+
+				#{$this}--name,
+				#{$this}--position {
+					margin: 0;
+					color: white;
+				}
+
+				#{$this}--name {
+					font-size: 1.35rem;
+					font-weight: 500;
+				}
+
+				#{$this}--position {
+					font-size: 1.1rem;
+					font-weight: 300;
+					margin: 0.25rem 0;
+				}
+			}
+
+			&--team-icon {
+				$size: 5rem;
+				background-color: white;
+				padding: 0.2rem;
+				border-radius: var(--radius-md);
+				overflow: hidden;
+
+				i {
+					display: flex;
+
+					@each $team in map.get($teams_sprite, names) {
+						&[data-team="#{$team}"] {
+							@include spriteItem($teams_sprite, $team, $size);
+						}
+					}
+				}
+			}
+		}
+
+		#{$this}--stats {
+			margin: unset;
+			list-style: none;
+			padding: unset;
+
+			display: flex;
+			flex-direction: column;
+			gap: 0.1rem;
+
+			li {
+				background-color: white;
+				padding: 0.5rem;
+
+				display: flex;
+				justify-content: space-between;
+
+				span {
+					font-weight: bold;
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,27 @@
+@function divSafe($a, $b) {
+	@if ($b == 0) {
+		@return 0;
+	}
+
+	@return math.div($a, $b);
+}
+
+@function getSpriteImagePosition($name, $names, $columns, $rows) {
+	$index: index($names, $name);
+	$row: ceil(math.div($index, $columns));
+	$column: $index % $columns;
+	@return percentage(divSafe(1, ($columns - 1)) * ($column - 1)) percentage(divSafe(1, ($rows - 1)) * ($row - 1));
+}
+
+@mixin spriteItem($sprite, $name, $size) {
+	background-image: url(map.get($sprite, image));
+	background-position: getSpriteImagePosition(
+		$name,
+		map.get($sprite, names),
+		map.get($sprite, columns),
+		map.get($sprite, rows)
+	);
+	height: $size;
+	width: $size;
+	background-size: auto $size * (map.get($sprite, rows));
+}

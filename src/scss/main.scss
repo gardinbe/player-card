@@ -1,0 +1,23 @@
+@use "sass:math";
+@use "sass:map";
+
+//libs
+@import "~bootstrap/scss/bootstrap-reboot";
+@import "~bootstrap/scss/bootstrap-grid";
+
+//scss logic
+@import "variables";
+@import "mixins";
+
+//fonts
+@import "fonts/roboto";
+
+//base styles
+@import "vars";
+@import "keyframes";
+@import "base";
+
+//components
+@import "components/custom-selector";
+@import "components/player-card";
+@import "components/loader";

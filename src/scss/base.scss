@@ -1,0 +1,21 @@
+body {
+	font-family: Roboto;
+	background-color: #141414;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	width: 100vw;
+	width: 100dvw;
+	height: 100vh;
+	height: 100dvh;
+
+	::selection {
+		background-color: var(--color-primary-light);
+	}
+}
+
+.entry-node {
+	position: relative;
+}
