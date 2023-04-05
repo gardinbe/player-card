@@ -1,11 +1,7 @@
-import playerCard from "@/components/player-card/player-card";
-import customSelectors from "@/lib/custom-selectors";
 import waitForDOM from "@/lib/wait-for-dom";
+import createPlayerCard from "@/player-card";
 
 waitForDOM().then(() => {
-	//common
-	customSelectors();
-
-	//singletons
-	playerCard();
+	//components
+	createPlayerCard();
 });

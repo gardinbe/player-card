@@ -3,7 +3,7 @@ import PlayerCardContainer from "@/components/player-card/player-card-container.
 import delay from "@/lib/delay";
 import { PlayerData } from "@/models/player-card.models";
 
-export default async () => {
+const createPlayerCard = async () => {
 	const entryNode = document.getElementById("player-card-entry-node");
 	if (entryNode === null) throw new Error("Failed to find player card entry point!");
 
@@ -28,6 +28,7 @@ export default async () => {
 		}
 	});
 }
+export default createPlayerCard;
 
 /**
  * Fetch player data from API
