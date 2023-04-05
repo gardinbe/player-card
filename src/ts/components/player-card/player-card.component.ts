@@ -1,52 +1,28 @@
+import PlayerCardSelectedPlayerComponent from "@/components/player-card/player-card-selected-player.component";
+import PlayerCardSelectorComponent from "@/components/player-card/player-card-selector.component";
 import Component from "@/lib/component";
-import { Player, PlayerStatisticName } from "@/models/player-card.models";
+import { Player } from "@/models/player-card.models";
 
 /**
- * A card that contains information about a player
+ * A container component for the card selector component, and for the card component
  */
-export default class PlayerCard extends Component {
-	create(props: {
-		player: Player
-	}) {
-		const getStat = (statName: PlayerStatisticName) => props.player.stats.find(stat => stat.name === statName)?.value ?? null;
+export default class PlayerCardComponent extends Component {
+	render(props: { players: Player[] }) {
+		this.destroy(); //lot of effort to avoid having to do this
 
-		//read / calculate stats
-		const goals = getStat("goals");
-		const appearances = getStat("appearances");
-		const assists = getStat("goal_assist");
-		const goalsPerMatch = goals === null || appearances === null ? null : (goals / appearances).toFixed(2);
-		const fwdPasses = getStat("fwd_pass");
-		const backwardPasses = getStat("backward_pass");
-		const minsPlayed = getStat("mins_played");
-		const passesPerMinute = fwdPasses === null || backwardPasses === null || minsPlayed === null ? null : ((fwdPasses + backwardPasses) / minsPlayed).toFixed(2);
+		this.setHtml(`<div class="player-card"></div>`);
 
-		const renderStat = (label: string, stat: string | number | null) => stat !== null ? `<li>${label} <span>${stat}</span></li>` : null;
+		const container = this.getElmt(".player-card");
 
-		this.setHtml(`
-			<div class="player-card">
-				<div class="player-card--image">
-					<img src="/static/img/p${props.player.player.id}.png" draggable="false">
-				</div>
-				<div class="player-card--details">
-					<div class="player-card--info">
-						<div class="player-card--info--basic">
-							<h1 class="player-card--name">${props.player.player.name.first} ${props.player.player.name.last}</h1>
-							<h2 class="player-card--position">${props.player.player.info.positionInfo}</h2>
-						</div>
+		//create child components
+		const selectedPlayerComponent = new PlayerCardSelectedPlayerComponent(container);
+		this.addChildComponent(selectedPlayerComponent);
 
-						<div class="player-card--info--team-icon">
-							<i data-team="${props.player.player.currentTeam.shortName.toLowerCase().replace(" ", "-")}"></i>
-						</div>						
-					</div>
-					<ul class="player-card--stats">
-						${renderStat("Appearances", appearances) ?? ""}
-						${renderStat("Goals", goals) ?? ""}
-						${renderStat("Assists", assists) ?? ""}
-						${renderStat("Goals per match", goalsPerMatch) ?? ""}
-						${renderStat("Passes per minute", passesPerMinute) ?? ""}
-					</ul>
-				</div>
-			</div>
-		`);
+		const playerSelectorComponent = new PlayerCardSelectorComponent(container, selectedPlayerComponent);
+		this.addChildComponent(playerSelectorComponent);
+
+		playerSelectorComponent.render({ players: props.players });
+
+		this.markAsRendered();
 	}
 }

@@ -1,5 +1,5 @@
 import LoaderComponent from "@/components/common/loader.component";
-import PlayerCardContainer from "@/components/player-card/player-card-container.component";
+import PlayerCardComponent from "@/components/player-card/player-card.component";
 import delay from "@/lib/delay";
 import { PlayerData } from "@/models/player-card.models";
 
@@ -7,12 +7,9 @@ const createPlayerCard = async () => {
 	const entryNode = document.getElementById("player-card-entry-node");
 	if (entryNode === null) throw new Error("Failed to find player card entry point!");
 
-	//define components
-	const loader = new LoaderComponent(entryNode);
-	const playerCardContainer = new PlayerCardContainer(entryNode);
-
 	//create the loader
-	loader.create({ fullscreen: true });
+	const loader = new LoaderComponent(entryNode);
+	loader.render({ fullscreen: true });
 
 	//read player data from json
 	const data = await getPlayerData();
@@ -21,18 +18,14 @@ const createPlayerCard = async () => {
 	//destroy the loader
 	loader.destroy();
 
-	//create the player card container. note that the first player is rendered when the page loads: selectboxes will select the first option by default
-	playerCardContainer.create({
-		selector: {
-			players
-		}
-	});
+	//create the player card container
+	const playerCard = new PlayerCardComponent(entryNode);
+	playerCard.render({ players });
 }
 export default createPlayerCard;
 
 /**
  * Fetch player data from API
- * @returns Promise for a PlayerData object
  */
 const getPlayerData = async (): Promise<PlayerData> => {
 	const res = await fetch("/static/data/player-stats.json").then(res => {
