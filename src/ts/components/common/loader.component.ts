@@ -1,4 +1,4 @@
-import Component from "@/lib/component.class";
+import Component from "@/lib/component";
 import { printIf } from "@/lib/ternary-shorthands";
 
 /**

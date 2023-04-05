@@ -1,5 +1,5 @@
-import customSelectors from "@/components/common/custom-selectors";
 import playerCard from "@/components/player-card/player-card";
+import customSelectors from "@/lib/custom-selectors";
 import waitForDOM from "@/lib/waitForDOM";
 
 waitForDOM().then(() => {

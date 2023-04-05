@@ -1,5 +1,5 @@
 import LoaderComponent from "@/components/common/loader.component";
-import PlayerCardContainer from "@/components/player-card/player-card-container";
+import PlayerCardContainer from "@/components/player-card/player-card-container.component";
 import delay from "@/lib/delay";
 import { PlayerData } from "@/models/player-card.models";
 

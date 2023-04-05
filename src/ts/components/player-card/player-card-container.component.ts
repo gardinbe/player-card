@@ -1,6 +1,6 @@
 import PlayerCardSelector from "@/components/player-card/player-card-selector.component";
 import PlayerCard from "@/components/player-card/player-card.component";
-import Component from "@/lib/component.class";
+import Component from "@/lib/component";
 import { Player } from "@/models/player-card.models";
 
 /**

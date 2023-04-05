@@ -1,6 +1,6 @@
-import { CustomSelector } from "@/components/common/custom-selectors";
 import PlayerCard from "@/components/player-card/player-card.component";
-import Component from "@/lib/component.class";
+import Component from "@/lib/component";
+import { CustomSelector } from "@/lib/custom-selectors";
 import { Player } from "@/models/player-card.models";
 
 
