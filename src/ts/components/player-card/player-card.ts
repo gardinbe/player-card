@@ -16,8 +16,7 @@ export default async () => {
 
 	//read player data from json
 	const data = await getPlayerData();
-	const players = new Map();
-	for (const player of data.players) players.set(player.player.id, player);
+	const players = data.players;
 
 	//destroy the loader
 	loader.destroy();
@@ -25,7 +24,7 @@ export default async () => {
 	//create the player card container. note that the first player is rendered when the page loads: selectboxes will select the first option by default
 	playerCardContainer.create({
 		selector: {
-			players: Array.from(players.values())
+			players
 		}
 	});
 }
