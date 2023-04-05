@@ -18,10 +18,10 @@ export default class PlayerCardComponent extends Component {
 		const selectedPlayerComponent = new PlayerCardSelectedPlayerComponent(container);
 		this.addChildComponent(selectedPlayerComponent);
 
-		const playerSelectorComponent = new PlayerCardSelectorComponent(container, selectedPlayerComponent);
+		const playerSelectorComponent = new PlayerCardSelectorComponent(container);
 		this.addChildComponent(playerSelectorComponent);
 
-		playerSelectorComponent.render({ players: props.players });
+		playerSelectorComponent.render({ selectedPlayerComponent, players: props.players });
 
 		this.markAsRendered();
 	}

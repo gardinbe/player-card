@@ -10,14 +10,7 @@ import { Player } from "@/models/player-card.models";
 export default class PlayerCardSelectorComponent extends Component {
 	private selector: CustomSelector | null = null;
 
-	constructor(
-		entryNode: HTMLElement,
-		private selectedPlayerComponent: PlayerCardSelectedPlayerComponent
-	) {
-		super(entryNode);
-	}
-
-	render(props: { players: Player[] }) {
+	render(props: { selectedPlayerComponent: PlayerCardSelectedPlayerComponent, players: Player[] }) {
 		this.destroy(); //lot of effort to avoid having to do this
 
 		this.setHtml(`
@@ -43,13 +36,13 @@ export default class PlayerCardSelectorComponent extends Component {
 			if (player === undefined) throw new Error("Failed to find a player for the provided id!");
 
 			//render this player
-			this.selectedPlayerComponent.render({ player });
+			props.selectedPlayerComponent.render({ player });
 		});
 
 		//render the first player
 		//technically might not be necessary, as selectbox selects the first available option by default, and this fires a change event
 		const firstPlayer = props.players[0];
-		if (firstPlayer !== undefined) this.selectedPlayerComponent.render({ player: firstPlayer });
+		if (firstPlayer !== undefined) props.selectedPlayerComponent.render({ player: firstPlayer });
 
 		this.markAsRendered();
 	}
