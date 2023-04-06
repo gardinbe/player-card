@@ -6,11 +6,6 @@ const path = require("path");
 //read env vars
 dotenv.config();
 
-const env = {
-	mode: process.env.NODE_ENV ?? "development",
-	port: process.env.PORT ?? 8080
-}
-
 //define paths
 const paths = {
 	src: path.join(__dirname, "src"),
@@ -25,4 +20,5 @@ app.use(express.static(__dirname)); //just display static index.html file
 
 //start server
 const server = http.createServer(app);
-server.listen(env.port, () => console.log(`\x1b[32mHTTP server started successfully: http://localhost:${env.port}/\x1b[0m`));
+const port = process.env.PORT ?? 8080;
+server.listen(port, () => console.log(`\x1b[32mHTTP server started successfully: http://localhost:${port}/\x1b[0m`));
