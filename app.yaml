@@ -7,4 +7,4 @@ env_variables:
 handlers:
   - url: /.*
     script: auto
-start: npm start
+entrypoint: npm start
