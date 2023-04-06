@@ -11,6 +11,12 @@
 			filter: opacity(1);
 		}
 
+		.options .option,
+		.selected-option {
+			color: white;
+			background-color: var(--color-primary-dark);
+		}
+
 		.selected-option {
 			border-radius: unset;
 			border-top-left-radius: var(--radius-xs);
@@ -19,11 +25,6 @@
 			i {
 				transform: rotate(180deg);
 			}
-		}
-
-		.options .option:last-child {
-			border-bottom-left-radius: var(--radius-xs);
-			border-bottom-right-radius: var(--radius-xs);
 		}
 	}
 
@@ -40,23 +41,25 @@
 		cursor: pointer;
 
 		background-color: var(--color-gray-1);
-		transition: background-color var(--anim);
+		transition: filter var(--anim), background-color var(--anim), color var(--anim);
 
 		&:hover {
-			background-color: var(--color-gray-2);
+			filter: var(--filter-dark-1);
 		}
 
 		&:active {
-			background-color: var(--color-gray-3);
+			filter: var(--filter-dark-2);
 		}
 	}
 
 	.selected-option {
+		z-index: 15;
+
 		align-items: center;
 		justify-content: space-between;
 
 		border-radius: var(--radius-xs);
-		transition: background-color var(--anim), border-radius var(--anim);
+		transition: filter var(--anim), background-color var(--anim), color var(--anim), border-radius var(--anim);
 
 		i {
 			transition: transform var(--anim);
@@ -70,11 +73,16 @@
 		list-style: none;
 
 		position: absolute;
+		z-index: 10;
 		top: 100%;
 
 		display: flex;
 		flex-direction: column;
 		width: 100%;
+		overflow: hidden;
+
+		border-bottom-left-radius: var(--radius-xs);
+		border-bottom-right-radius: var(--radius-xs);
 
 		pointer-events: none;
 		filter: opacity(0);
