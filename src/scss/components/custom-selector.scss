@@ -43,12 +43,18 @@
 		background-color: var(--color-gray-1);
 		transition: filter var(--anim), background-color var(--anim), color var(--anim);
 
-		&:hover {
+		&:active {
 			filter: var(--filter-dark-1);
 		}
 
-		&:active {
-			filter: var(--filter-dark-2);
+		@include media-breakpoint-up(lg) {
+			&:hover {
+				filter: var(--filter-dark-1);
+			}
+
+			&:active {
+				filter: var(--filter-dark-2);
+			}
 		}
 	}
 
@@ -86,7 +92,7 @@
 
 		pointer-events: none;
 		filter: opacity(0);
-		transform: translateY(-1rem);
+		transform: translateY(-2rem);
 		transition: filter var(--anim), transform var(--anim);
 
 		.option {
