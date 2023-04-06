@@ -1,14 +1,10 @@
 runtime: nodejs18 # or another supported version
-start: npm start
-
 service: default
-
-handlers:
-  - url: /.*
-    script: auto
-
-
 env_variables:
   PORT: 80
   MODE: production
   NODE_ENV: production
+handlers:
+  - url: /.*
+    script: auto
+start: npm start
