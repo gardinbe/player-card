@@ -1,5 +1,4 @@
 runtime: nodejs18 # or another supported version
-service: default
 env_variables:
   PORT: 80
   MODE: production
@@ -7,4 +6,3 @@ env_variables:
 handlers:
   - url: /.*
     script: auto
-entrypoint: npm start
