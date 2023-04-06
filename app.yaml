@@ -8,8 +8,7 @@ handlers:
   redirect_http_response_code: 301
   script: auto
 
-ports:
-  - name: https # Use http or https
-      protocol: TCP
-      port: 8080
-      targetPort: 8080
+env_variables:
+  PORT: 80
+  MODE: production
+  NODE_ENV: production
