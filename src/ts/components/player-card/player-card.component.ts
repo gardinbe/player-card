@@ -10,7 +10,9 @@ export default class PlayerCardComponent extends Component {
 	render(props: { players: Player[] }) {
 		this.destroy(); //lot of effort to avoid having to do this
 
-		this.setHtml(`<div class="player-card"></div>`);
+		this.setHtml(/*html*/`
+			<div class="player-card"></div>
+		`);
 
 		const container = this.getElmt(".player-card");
 

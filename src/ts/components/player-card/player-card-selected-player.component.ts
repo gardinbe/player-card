@@ -23,7 +23,7 @@ export default class PlayerCardSelectedPlayerComponent extends Component {
 		const renderStat = (label: string, stat: string | number | null) => stat !== null ? `<li>${label} <span>${stat}</span></li>` : null;
 
 		const className = "player-card--selected-player";
-		this.setHtml(`
+		this.setHtml(/*html*/`
 			<div class="${className}">
 				<div class="${className}--image">
 					<img src="/static/img/p${props.player.player.id}.png" draggable="false">

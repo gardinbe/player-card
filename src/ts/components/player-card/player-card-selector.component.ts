@@ -13,7 +13,7 @@ export default class PlayerCardSelectorComponent extends Component {
 	render(props: { selectedPlayerComponent: PlayerCardSelectedPlayerComponent, players: Player[] }) {
 		this.destroy(); //lot of effort to avoid having to do this
 
-		this.setHtml(`
+		this.setHtml(/*html*/`
 			<div class="player-card--selector">
 				<select class="selector">
 					${props.players.map(player => `<option value="${player.player.id}">${player.player.name.first} ${player.player.name.last}</option>`).join("")}

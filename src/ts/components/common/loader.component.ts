@@ -9,7 +9,7 @@ export default class LoaderComponent extends Component {
 	render(props: { fullscreen: boolean } = { fullscreen: false }) {
 		this.destroy(); //lot of effort to avoid having to do this
 
-		this.setHtml(`
+		this.setHtml(/*html*/`
 			<div class="loader-container ${printIf(props.fullscreen, "fullscreen")}">
 				<div class="loader"></div>
 			</div>
