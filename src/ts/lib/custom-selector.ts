@@ -97,7 +97,9 @@ export default class CustomSelector {
 
 	selectOption(option: CustomSelectorOption) {
 		//add new option text to the selected option box
-		this.selectedOptionElmt.textContent = option.elmt.textContent;
+		const selectedOptionTextNode = this.selectedOptionElmt.childNodes[0];
+		if (selectedOptionTextNode === undefined) throw new Error("Error trying to set selected item text content!");
+		selectedOptionTextNode.textContent = option.elmt.textContent;
 
 		//update original select box
 		this.originalSelect.selectedIndex = -1;
@@ -137,6 +139,9 @@ export default class CustomSelector {
 			const selectedBox = document.createElement("span");
 			selectedBox.classList.add("selected-option");
 			selectedBox.textContent = "Please select...";
+			const icon = document.createElement("i");
+			icon.classList.add("fa-solid", "fa-chevron-down");
+			selectedBox.appendChild(icon);
 			selectedBox.addEventListener("click", this.toggle.bind(this));
 			return selectedBox;
 		},

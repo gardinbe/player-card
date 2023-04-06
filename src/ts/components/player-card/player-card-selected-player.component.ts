@@ -1,4 +1,5 @@
 import Component from "@/lib/component";
+import { printIf } from "@/lib/ternary-shorthands";
 import { Player, PlayerStatisticName } from "@/models/player-card.models";
 
 /**
@@ -20,7 +21,7 @@ export default class PlayerCardSelectedPlayerComponent extends Component {
 		const minsPlayed = getStat("mins_played");
 		const passesPerMinute = fwdPasses === null || backwardPasses === null || minsPlayed === null ? null : ((fwdPasses + backwardPasses) / minsPlayed).toFixed(2);
 
-		const renderStat = (label: string, stat: string | number | null) => stat !== null ? `<li>${label} <span>${stat}</span></li>` : null;
+		const renderStat = (label: string, stat: string | number | null) => printIf(stat !== null, /*html*/`<li class="stat">${label}<span>${stat}</span></li>`);
 
 		const className = "player-card--selected-player";
 		this.setHtml(/*html*/`
@@ -40,11 +41,11 @@ export default class PlayerCardSelectedPlayerComponent extends Component {
 						</div>						
 					</div>
 					<ul class="${className}--stats">
-						${renderStat("Appearances", appearances) ?? ""}
-						${renderStat("Goals", goals) ?? ""}
-						${renderStat("Assists", assists) ?? ""}
-						${renderStat("Goals per match", goalsPerMatch) ?? ""}
-						${renderStat("Passes per minute", passesPerMinute) ?? ""}
+						${renderStat("Appearances", appearances)}
+						${renderStat("Goals", goals)}
+						${renderStat("Assists", assists)}
+						${renderStat("Goals per match", goalsPerMatch)}
+						${renderStat("Passes per minute", passesPerMinute)}
 					</ul>
 				</div>
 			</div>

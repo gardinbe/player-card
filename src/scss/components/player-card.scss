@@ -3,12 +3,15 @@
 
 	position: relative;
 	width: 350px;
-	background-color: white;
+	box-shadow: 0 0 8px 0 black;
+	border-radius: var(--radius-md);
+	overflow: hidden;
 	animation: FadeIn 300ms ease-in-out;
 
 	//the selectbox
 	&--selector {
 		padding: $player-card-gutter;
+		background-color: white;
 	}
 
 	//the card itself
@@ -16,8 +19,8 @@
 		$this: &;
 
 		&--image {
-			background-color: white;
 			padding: $player-card-gutter $player-card-gutter 0;
+			background-color: white;
 
 			img {
 				margin-bottom: -5px;
@@ -71,13 +74,13 @@
 				}
 
 				&--team-icon {
-					$size: 5rem;
 					background-color: white;
 					padding: 0.2rem;
 					border-radius: var(--radius-md);
 					overflow: hidden;
 
 					i {
+						$size: 5rem;
 						display: flex;
 
 						//very noice mixin to get team logo from team sprite
@@ -97,17 +100,24 @@
 
 				display: flex;
 				flex-direction: column;
-				gap: 0.1rem;
+				gap: 0.15rem;
 
-				li {
-					background-color: white;
-					padding: 0.5rem;
+				* {
+					color: white;
+				}
 
+				.stat {
 					display: flex;
 					justify-content: space-between;
+					align-items: center;
+
+					background-color: var(--color-primary-dark);
+					padding: 0.25rem 0.5rem;
+					border-radius: var(--radius-xs);
 
 					span {
 						font-weight: bold;
+						font-size: 1.1rem;
 					}
 				}
 			}
