@@ -6,7 +6,7 @@ service: default
 handlers:
   - url: /.*
     script: auto
-    
+
 
 env_variables:
   PORT: 80
