@@ -12,44 +12,47 @@ type CustomSelectorOption = {
  */
 export default class CustomSelector {
 	private opened = false;
-	private options: CustomSelectorOption[];
+	private options: CustomSelectorOption[] = [];
 	private selectedOption: CustomSelectorOption | null = null;
 
 	private elmt: HTMLElement;
 	private selectedOptionElmt: HTMLElement;
 	private optionListElmt: HTMLElement;
 
-	private transitionDuration: number = 0;
+	private transitionDuration: number;
 
 	private windowClick: (ev: MouseEvent) => void;
 
 	constructor(
-		private originalSelect: HTMLSelectElement
+		private originalSelectElmt: HTMLSelectElement
 	) {
 		this.elmt = this.generate.elmt();
 
 		//put attributes currently on the selectbox onto the containing elmt
-		for (const attribute of this.originalSelect.attributes) {
+		for (const attribute of this.originalSelectElmt.attributes) {
 			this.elmt.setAttribute(attribute.name, attribute.value);
-			this.originalSelect.removeAttribute(attribute.name);
+			this.originalSelectElmt.removeAttribute(attribute.name);
 		}
 
 		//and then replace the selectbox with this containing elmt
-		this.originalSelect.replaceWith(this.elmt);
-		this.elmt.appendChild(this.originalSelect);
+		this.originalSelectElmt.replaceWith(this.elmt);
+		this.elmt.appendChild(this.originalSelectElmt);
 
 		//generate the custom elements
 		this.optionListElmt = this.generate.optionList();
 		this.selectedOptionElmt = this.generate.selectedBox();
 
 		//generate the custom option elements using the original options
-		this.options = [];
-		const originalOptions = Array.from(this.originalSelect.options);
-		for (const option of originalOptions.map(originalOption => this.generate.option(originalOption))) this.addOption(option);
+		const originalOptionElmts = Array.from(this.originalSelectElmt.options);
+		for (const option of originalOptionElmts.map(originalOptionElmt => this.generate.option(originalOptionElmt))) this.addOption(option);
 
 		//if it exists, select the originally selected option
-		const originalSelectedOption = this.options.find(option => originalOptions.find(originalOption => originalOption.value === option.value && originalOption.selected));
-		if (originalSelectedOption !== undefined) this.selectOption(originalSelectedOption);
+		const originalSelectedOption = originalOptionElmts.find(optionElmt => optionElmt.selected);
+		if (originalSelectedOption !== undefined) {
+			const selectedOption = this.options.find(option => option.value === originalSelectedOption.value);
+			if (selectedOption === undefined) throw new Error("Failed to get default selected option from select box!");
+			this.selectOption(selectedOption);
+		}
 
 		//custom elements are ready: add them to the DOM now
 		this.elmt.appendChild(this.selectedOptionElmt);
@@ -102,9 +105,9 @@ export default class CustomSelector {
 		selectedOptionTextNode.textContent = option.elmt.textContent;
 
 		//update original select box
-		this.originalSelect.selectedIndex = -1;
+		this.originalSelectElmt.selectedIndex = -1;
 		option.originalElmt.selected = true;
-		this.originalSelect.dispatchEvent(new Event("change"));
+		this.originalSelectElmt.dispatchEvent(new Event("change"));
 
 		//update the selected option
 		const previouslySelectedOption = this.selectedOption;
