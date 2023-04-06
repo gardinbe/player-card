@@ -1,6 +1,6 @@
 runtime: nodejs18 # or another supported version
 env_variables:
-  PORT: 80
+  PORT: 8080
   MODE: production
   NODE_ENV: production
 handlers:
